@@ -9,6 +9,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
+                sh 'ls -ltrh'
                 sh 'cd End-to-End-CI-CD-Project && mvn clean install'
             }
         }
