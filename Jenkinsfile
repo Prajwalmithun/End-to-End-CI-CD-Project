@@ -16,7 +16,7 @@ pipeline {
 
          stage('Static Code Analysis') {
             environment {
-                SONAR_URL = "http://13.56.140.138:9000/"
+                SONAR_URL = "http://13.57.15.123:9000/"
               }
             steps {
               withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -25,5 +25,31 @@ pipeline {
               }
             }
         }
+
+        stage('Build and Push Docker Image') {
+            environment {
+                DOCKER_IMAGE = "prajwal3498/cicd-v1:${BUILD_NUMBER}"
+                // DOCKERFILE_LOCATION = "java-maven-sonar-argocd-helm-k8s/spring-boot-app/Dockerfile"
+                REGISTRY_CREDENTIALS = credentials('docker-cred')
+              }
+
+            steps {
+              script {
+                sh 'docker build -t ${DOCKER_IMAGE} .'
+                def dockerImage = docker.image("${DOCKER_IMAGE}")
+                docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                  dockerImage.push() 
+                }
+              }
+            }
+        }
+
     }
-}
+
+} 
+        
+      
+
+
+
+    
