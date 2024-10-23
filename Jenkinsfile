@@ -1,11 +1,15 @@
 pipeline {
     agent {
-        docker { image 'node:20.18.0-alpine3.20' }
+    docker 
+    {
+      image 'abhishekf5/maven-abhishek-docker-agent:v1'
+      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
+  }
     stages {
-        stage('Test') {
+        stage('build') {
             steps {
-                sh 'node --version'
+                sh 'cd End-to-End-CI-CD-Project && mvn clean install'
             }
         }
     }
