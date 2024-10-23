@@ -1,5 +1,5 @@
 # Use the official OpenJDK 17 image from Docker Hub
-FROM openjdk:17
+FROM openjdk:11
 # Set working directory inside the container (mkdir /app && cd /app)
 WORKDIR /app
 # Copy the compiled Java application JAR file into the container
