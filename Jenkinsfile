@@ -2,7 +2,8 @@ pipeline {
     agent {
     docker 
     {
-      image 'maven:3.8.3-openjdk-17'
+      // image 'maven:3.8.3-openjdk-17'
+      image 'prajwal3498/docker-agent-cicd:latest'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon (we need in docker build and push step)
     }
   }
@@ -37,7 +38,8 @@ pipeline {
               script {
                 sh 'docker build -t ${DOCKER_IMAGE} .'
                 def dockerImage = docker.image("${DOCKER_IMAGE}")
-                docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                docker.withRegistry('https://index.docker.io/v1/', "docker-cred") 
+                {
                   dockerImage.push() 
                 }
               }

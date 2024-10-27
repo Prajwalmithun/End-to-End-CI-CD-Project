@@ -54,3 +54,6 @@ RUN apt-get install -y docker-ce docker-ce-cli containerd.io && \
 
 # Start Docker Daemon (optional for container environment)
 CMD ["dockerd"]
+
+# FROM maven:3.8.3-openjdk-17
+# RUN apt update && apt install -y docker.io
