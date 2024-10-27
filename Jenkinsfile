@@ -2,8 +2,8 @@ pipeline {
     agent {
     docker 
     {
-      image 'maven:3.8.3-openjdk-17'
-      // image 'prajwal3498/docker-agent-cicd:latest'
+      // image 'maven:3.8.3-openjdk-17'
+      image 'prajwal3498/docker-agent-cicd:latest'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon (we need in docker build and push step)
     }
   }
@@ -17,7 +17,7 @@ pipeline {
 
          stage('Static Code Analysis') {
             environment {
-                SONAR_URL = "http://13.57.15.123:9000/"
+                SONAR_URL = "http://54.219.140.80:9000/"
               }
             steps {
               withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
