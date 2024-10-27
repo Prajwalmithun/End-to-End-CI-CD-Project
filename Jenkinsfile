@@ -3,7 +3,8 @@ pipeline {
     docker 
     {
       // image 'maven:3.8.3-openjdk-17'
-      image 'prajwal3498/docker-agent-cicd:latest'
+      // image 'prajwal3498/docker-agent-cicd:latest'
+      image 'prajwal3498/docker-agent-cicd-amd64:latest'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon (we need in docker build and push step)
     }
   }
