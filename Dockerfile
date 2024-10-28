@@ -1,6 +1,6 @@
 # Use the official OpenJDK 17 image from Docker Hub
 FROM openjdk:17
-# Set working directory inside the container
+# Set working directory inside the container (mkdir /app && cd /app)
 WORKDIR /app
 # Copy the compiled Java application JAR file into the container
 COPY ./target/course-service.jar /app
